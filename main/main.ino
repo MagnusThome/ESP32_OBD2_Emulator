@@ -8,20 +8,27 @@ Any OBD2 standard PID requested gets a reply with a fake value
 
 #include "esp32_can.h"     // https://github.com/collin80/esp32_can AND https://github.com/collin80/can_common
 
-#define YELLOW_LED        12	// CAN PACKET RECEIVED
-#define BLUE_LED          13	// CAN INIT FAILED
-#define CAN_RX_PIN        16	// 13 for RejsaCAN v3.x
-#define CAN_TX_PIN        17	// 14 for RejsaCAN v3.x
+#define YELLOW_LED        12  // CAN PACKET RECEIVED
+#define BLUE_LED          13  // CAN INIT FAILED
+#define CAN_RX_PIN        16  // 13 for RejsaCAN v3.x
+#define CAN_TX_PIN        17  // 14 for RejsaCAN v3.x
 #define ANALOG_INPUT1     33  // 1, 2, 3, 6 or 7 for RejsaCAN v3.x  
 #define ANALOGMAX         4095
 
-#define PIDS_SUPPORT_01_20   0x00
-#define PIDS_SUPPORT_21_40   0x20
-#define PIDS_SUPPORT_41_60   0x40
-#define ENGINE_RPM           0x0c
-#define VEHICLE_SPEED        0x0d
-#define TIMING_ADVANCE       0x0e
-#define THROTTLE_POSITION    0x11
+
+#define PIDS_SUPPORT_01_20   	0x00
+#define PIDS_SUPPORT_21_40   	0x20
+#define PIDS_SUPPORT_41_60   	0x40
+#define ENGINE_RPM           	0x0c
+#define VEHICLE_SPEED        	0x0d
+#define TIMING_ADVANCE       	0x0e
+#define AIR_INTAKE_TEMPERATURE  0x0f
+#define MAF_AIR_FLOW_RATE       0x10
+#define THROTTLE_POSITION    	0x11
+#define ENGINE_OIL_TEMPERATURE  0x5c
+
+// add more from https://en.wikipedia.org/wiki/OBD-II_PIDs
+
 
 void setup() {
   Serial.begin(115200);
@@ -121,4 +128,3 @@ void printhex(uint8_t val) {
   }
   Serial.print(val, HEX);
 }
-
